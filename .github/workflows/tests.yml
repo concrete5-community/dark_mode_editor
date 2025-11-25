@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "7.3"
+          - "8.5"
           - "8.5"
     steps:
       -
@@ -69,6 +69,12 @@ jobs:
     strategy:
       matrix:
         ccm-version:
+          - 8.5.7
+          - "8.5"
+          - "9.0"
+          - "9.1"
+          - "9.2"
+          - "9.3"
           - "9.4"
           - latest
     steps:
