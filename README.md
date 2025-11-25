@@ -1,24 +1,28 @@
-/**
- * @project:   Update Dark Mode Editor
- * @copyright  (C) 2016-2025 www.blink.ch
- * @author     blinkbox 2025-11-20
- * @version    1.0.2
- */
+[![Tests](https://github.com/concrete5-community/dark_mode_editor/actions/workflows/tests.yml/badge.svg)](https://github.com/concrete5-community/dark_mode_editor/actions/workflows/tests.yml)
 
-README
-***** [update] (DARK MODE EDITOR) ***
-Ckeditor Dark Mode Plugin, developed for ConcreteCMS v.5.7, as part of the blink_base_theme and variable_font_package for blink.ch 2016-04-05 by Ravish Aggarwal.
+# CKEditor Dark Mode Toggle
 
-# Installation Instructions
-1. Unzip this file in your site's packages/ directory.
-2. Login to your site as an administrator.
-3. Find the "Add Functionality" page in your dashboard.
-4. Find this package in the list of packages awaiting installation.
-5. Click the "Install" button.
-6. Goto System & Settings, Rich Text Editor an activate "Dark Mode Editor" in the list. 
-7. Empty cache
+This ConcreteCMS package that adds a Dark Mode Toggle to CKEditor.
 
-## Disclaimer
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## Installation
 
-## Licensed under https://opensource.org/licenses/MIT
+* From the ConcreteCMS Marketplace: (to be done)
+* For composer-based Concrete instances, simply run
+   ```sh
+   composer require concrete5-community/dark_mode_editor
+   ```
+* Manual installation:
+  1. download a `dark_mode_editor-v….zip` file from the [releases page](https://github.com/concrete5-community/dark_mode_editor/releases/latest)
+  2. extract the zip file in your `packages` directory
+
+Then, you have to login in your ConcreteCMS website, go to the Dashboard > Extend Concrete > Add Functionality, and install the package.
+
+## Usage
+
+Once the package is installed, you can activate/deactivate the "Dark Mode Toggle" plugin in the *System & Settings* > *Basics* > *Rich Text Editor* dashboard page.
+
+When the plugin is activated, you'll see a new icon in the CKEditor toolbar that, if clicked, lets you toggle the dark background.
+
+## Credits
+
+This ConcreteCMS package has been originally developed by [blinkbox](https://www.blink.ch/).
