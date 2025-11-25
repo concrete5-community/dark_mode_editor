@@ -41,7 +41,7 @@ class Controller extends Package
      */
     public function getPackageDescription()
     {
-        return t('Adds a Dark Mode Toggler für Ckeditor.');
+        return t('Adds a Dark Mode Toggle to CKEditor');
     }
 
     /**
