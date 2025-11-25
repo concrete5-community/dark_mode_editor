@@ -1,0 +1,49 @@
+{
+    "name": "concrete5-community/dark_mode_editor",
+    "description": "A ConcreteCMS package that adds a Dark Mode Toggle to CKEditor",
+    "type": "concrete5-package",
+    "keywords": [
+        "concretecms",
+        "concrete",
+        "cms",
+        "concrete5",
+        "package",
+        "addon",
+        "dark mode",
+        "darkmode",
+        "dark",
+        "light",
+        "lightmode",
+        "toggle",
+        "ckeditor",
+        "editor",
+        "background"
+    ],
+    "homepage": "https://github.com/concrete5-community/dark_mode_editor",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "blinkbox",
+            "email": "info@blink.ch",
+            "role": "original author",
+            "homepage": "https://www.blink.ch"
+        },
+        {
+            "name": "Michele Locati",
+            "email": "michele@locati.it",
+            "role": "maintainer",
+            "homepage": "https://mlocati.github.io"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/concrete5-community/dark_mode_editor/issues",
+        "source": "https://github.com/concrete5-community/dark_mode_editor"
+    },
+    "require": {
+        "concrete5/core": "^9.4"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
