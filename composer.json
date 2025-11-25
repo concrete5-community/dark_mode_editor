@@ -40,7 +40,7 @@
         "source": "https://github.com/concrete5-community/dark_mode_editor"
     },
     "require": {
-        "concrete5/core": "^9.4"
+        "concrete5/core": "^8.5.7 || ^9"
     },
     "config": {
         "optimize-autoloader": true,
