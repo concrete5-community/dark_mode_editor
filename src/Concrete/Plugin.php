@@ -2,6 +2,7 @@
 
 namespace Concrete\Package\DarkModeEditor;
 
+use Concrete\Core\Config\Repository\Repository;
 use Concrete\Core\Http\ResponseFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,12 +11,18 @@ defined('C5_EXECUTE') or die('Access Denied.');
 class Plugin
 {
     /**
+     * @var \Concrete\Core\Config\Repository\Repository
+     */
+    private $config;
+
+    /**
      * @var \Concrete\Core\Http\ResponseFactoryInterface
      */
     private $responseFactory;
 
-    public function __construct(ResponseFactoryInterface $responseFactory)
+    public function __construct(Repository $config, ResponseFactoryInterface $responseFactory)
     {
+        $this->config = $config;
         $this->responseFactory = $responseFactory;
     }
 
@@ -35,10 +42,20 @@ class Plugin
 
     private function generateJavascript()
     {
-        $label = json_encode(t('Toggle Dark Mode'));
+        $styles = [];
+        $color = $this->config->get('dark_mode_editor::options.backgroundColor');
+        $styles['background-color'] = is_string($color) && ($color = trim($color)) !== '' ? $color : '#222222';
+        $color = $this->config->get('dark_mode_editor::options.textColor');
+        if (is_string($color) && ($color = trim($color)) !== '') {
+            $styles['color'] = $color;
+        }
+        $jsStyles = json_encode($styles);
+        $jsLabel = json_encode(t('Toggle Dark Mode'));
 
         return <<<EOT
 (function() {
+
+const STYLES = {$jsStyles};
 
 function setDarkMode(editor, enable) {
     const editable = editor?.editable();
@@ -47,16 +64,16 @@ function setDarkMode(editor, enable) {
     }
     if (enable) {
         if (!editor._darkModeOriginalData) {
-            editor._darkModeOriginalData = {
-                backgroundColor: editable.getStyle('background-color'),
-                color: editable.getStyle('color')
-            };
+            editor._darkModeOriginalData = {};
+            Object.keys(STYLES).forEach(key => editor._darkModeOriginalData[key] = editable.getStyle(key));
         }
-        editable.setStyle('background-color', '#222222');
-        editable.setStyle('color', '#eeeeee');
+        for (const [key, value] of Object.entries(STYLES)) {
+            editable.setStyle(key, value);
+        }
     } else if (editor._darkModeOriginalData) {
-        editable.setStyle('background-color', editor._darkModeOriginalData.backgroundColor);
-        editable.setStyle('color', editor._darkModeOriginalData.color);
+        for (const [key, value] of Object.entries(editor._darkModeOriginalData)) {
+            editable.setStyle(key, value);
+        }
     }
 }
 
@@ -77,7 +94,7 @@ CKEDITOR.plugins.add('darkmode', {
             },
         });
         editor.ui.addButton('darkmode', {
-            label: {$label},
+            label: {$jsLabel},
             command: 'toggleDarkMode',
             toolbar: 'tools',
             icon: CCM_REL + '/packages/dark_mode_editor/images/plugin.svg',
