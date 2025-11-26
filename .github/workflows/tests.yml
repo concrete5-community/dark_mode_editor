@@ -93,10 +93,17 @@ jobs:
         run: ln -s "$GITHUB_WORKSPACE" /app/packages/dark_mode_editor
       -
         name: Start services
-        run: ccm-service start db
-      -
-        name: Core info
-        run: sudo -u www-data /app/concrete/bin/concrete5 --ansi --no-interaction c5:info
+        run: ccm-service start db web
       -
         name: Install package
         run: sudo -u www-data /app/concrete/bin/concrete5 --ansi --no-interaction c5:package:install dark_mode_editor
+      -
+        name: Dump environment info
+        run: sudo -u www-data /app/concrete/bin/concrete5 --ansi --no-interaction c5:info
+      -
+        name: Fetch homepage
+        run: >
+          curl
+          --silent --fail --output /dev/null
+          --write-out 'HTTP Response Code: %{http_code}\nContent-Type: %{content_type}\nContent-Length: %{size_download}\n'
+          http://localhost/
