@@ -29,7 +29,6 @@ class Plugin
             Response::HTTP_OK,
             [
                 'Content-Type' => 'application/javascript',
-                
             ]
         );
     }
@@ -39,20 +38,39 @@ class Plugin
         $label = json_encode(t('Toggle Dark Mode'));
 
         return <<<EOT
+(function() {
+
+function setDarkMode(editor, enable) {
+    const editable = editor?.editable();
+    if (!editable) {
+        return;
+    }
+    if (enable) {
+        if (!editor._darkModeOriginalData) {
+            editor._darkModeOriginalData = {
+                backgroundColor: editable.getStyle('background-color'),
+                color: editable.getStyle('color')
+            };
+        }
+        editable.setStyle('background-color', '#222222');
+        editable.setStyle('color', '#eeeeee');
+    } else if (editor._darkModeOriginalData) {
+        editable.setStyle('background-color', editor._darkModeOriginalData.backgroundColor);
+        editable.setStyle('color', editor._darkModeOriginalData.color);
+    }
+}
+
 CKEDITOR.plugins.add('darkmode', {
     init(editor) {
-        editor.addCommand('toggleDark', {
+        editor.addCommand('toggleDarkMode', {
             exec(editor) {
-                const editable = editor.editable();
                 switch (this.state) {
                     case CKEDITOR.TRISTATE_OFF:
-                        editable.setStyle('background-color', '#222222');
-                        editable.setStyle('color', '#eeeeee');
+                        setDarkMode(editor, true);
                         this.setState(CKEDITOR.TRISTATE_ON);
                         break;
                     case CKEDITOR.TRISTATE_ON:
-                        editable.setStyle('background-color', '');
-                        editable.setStyle('color', '');
+                        setDarkMode(editor, false);
                         this.setState(CKEDITOR.TRISTATE_OFF);
                         break;
                 }
@@ -60,14 +78,16 @@ CKEDITOR.plugins.add('darkmode', {
         });
         editor.ui.addButton('darkmode', {
             label: {$label},
-            command: 'toggleDark',
+            command: 'toggleDarkMode',
             toolbar: 'tools',
             icon: CCM_REL + '/packages/dark_mode_editor/images/plugin.svg',
         });
+        editor.on('beforeDestroy', (e) => setDarkMode(e?.editor, false));
     },
 });
 
-EOT
-        ;
+})();
+
+EOT;
     }
 }

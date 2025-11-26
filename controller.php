@@ -81,7 +81,7 @@ class Controller extends Package
         $al = AssetList::getInstance();
         $al->register('javascript-localized', 'dark_mode_editor/ckeditor4/plugin', 'ccm/dark_mode_editor/ckeditor4/plugin');
         $al->registerGroup('dark_mode_editor/ckeditor4/plugin', [
-            ['javascript-localized', 'dark_mode_editor/ckeditor4/plugin']
+            ['javascript-localized', 'dark_mode_editor/ckeditor4/plugin'],
         ]);
     }
 
@@ -89,8 +89,7 @@ class Controller extends Package
     {
         $this->app->extend(
             CkeditorEditor::class,
-            static function (CkeditorEditor $editor, Application $app)
-            {
+            static function (CkeditorEditor $editor, Application $app) {
                 $pluginManager = $editor->getPluginManager();
                 $plugin = new EditorPlugin();
                 $plugin->setKey('darkmode');
@@ -106,7 +105,7 @@ class Controller extends Package
     }
 
     /**
-     * @param bool $enabled
+     * @param bool $enable
      */
     private function setPluginEnabled($enable)
     {
