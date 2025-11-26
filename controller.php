@@ -15,7 +15,7 @@ class Controller extends Package
 {
     protected $pkgHandle = 'dark_mode_editor';
 
-    protected $pkgVersion = '1.1.1';
+    protected $pkgVersion = '1.1.2';
 
     /**
      * {@inheritdoc}
