@@ -27,6 +27,32 @@ Once the package is installed, you can activate/deactivate the "Dark Mode Toggle
 
 When the plugin is activated, you'll see a new icon (a circle split vertically into a white half and a black half) in the editor toolbar that, if clicked, lets you toggle the dark background.
 
+## Configuration
+
+Bu default, the plugin will change the background color to black and the text color to white.
+
+If you need to change these colors, you can create the file `application/config/dark_mode_editor/options.php` with some contents like this:
+
+```php
+<?php
+return [
+    // Your custom background color
+    'backgroundColor' => '#d0d0d0',
+    // Your custom background color
+    'textColor' => '#00ff00',
+];
+```
+
+If you don't want to set the color of the text, you can assign an empty string to `textColor`:
+
+```php
+<?php
+return [
+    'backgroundColor' => '#d0d0d0',
+    'textColor' => '',
+];
+```
+
 ## Credits
 
 This ConcreteCMS package was originally developed by [blinkbox](https://www.blink.ch/).
