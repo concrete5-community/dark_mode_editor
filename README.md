@@ -36,14 +36,22 @@ If you need to change these colors, you can create the file `application/config/
 ```php
 <?php
 return [
-  // Your custom background color
-  'backgroundColor' => '#d0d0d0',
-  // Your custom background color
-  'textColor' => '#0f0',
+    // Your custom background color
+    'backgroundColor' => '#d0d0d0',
+    // Your custom background color
+    'textColor' => '#00ff00',
 ];
 ```
 
-If you don't want to set the color of the text, you can write `'textColor' => '',`
+If you don't want to set the color of the text, you can assign an empty string to `textColor`:
+
+```php
+<?php
+return [
+    'backgroundColor' => '#d0d0d0',
+    'textColor' => '',
+];
+```
 
 ## Credits
 
